@@ -816,7 +816,7 @@ impl<R: io::Read, E: Endianness> HuffmanRead<E> for BitReader<R, E> {
                     result = &tree[read_byte(&mut self.reader)? as usize];
                 }
                 ReadHuffmanTree::InvalidState => {
-                    panic!("invalid state");
+                    return Err(io::Error::new(io::ErrorKind::InvalidData, "Invalid state"));
                 }
             }
         }
